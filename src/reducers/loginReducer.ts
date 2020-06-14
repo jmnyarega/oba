@@ -16,15 +16,10 @@ const initialReducer: State = {
   },
 };
 
-const userReducer = (state = initialReducer.login, action: any) => {
+const loginReducer = (state = initialReducer.login, action: any) => {
   switch (action.type) {
     case UserAction.LOGIN_SUCCESS: {
-      return {
-        ...state,
-        user: action.payload,
-        message: action.message,
-        pending: false,
-      };
+      return action.payload;
     }
     case UserAction.LOGIN_PENDING: {
       return {
@@ -39,16 +34,9 @@ const userReducer = (state = initialReducer.login, action: any) => {
         message: action.message,
       };
     }
-
-    case UserAction.GET_LOGIN_DETAILS: {
-      return {
-        ...state,
-        user: action.payload,
-      };
-    }
     default:
       return state;
   }
 };
 
-export default userReducer;
+export default loginReducer;

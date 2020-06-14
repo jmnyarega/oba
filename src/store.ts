@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import userReducer from "./reducers/userReducer";
+import loginReducer from "./reducers/loginReducer";
+import signUpReducer from "./reducers/signUpReducer";
 
 const rootReducer = combineReducers({
-  login: userReducer,
+  login: loginReducer,
+  signup: signUpReducer,
 });
 
 const store = createStore(

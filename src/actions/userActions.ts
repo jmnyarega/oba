@@ -3,6 +3,9 @@ export enum UserAction {
   LOGIN_PENDING = "LOGIN_PENDING",
   LOGIN_FAIL = "LOGIN_FAIL",
   GET_LOGIN_DETAILS = "GET_LOGIN_DETAILS",
+  SIGNUP_SUCCESS = "SIGNUP_SUCCESS",
+  SIGNUP_PENDING = "SIGNUP_PENDING",
+  SIGNUP_FAIL = "SIGNUP_FAIL",
 }
 export type Action = {
   type: UserAction;
@@ -34,7 +37,7 @@ export const userLogin = (loginDetails: LoginDetails): Action => ({
 });
 
 export const userSignUp = (signUpDetails: SignUpDetails): Action => ({
-  type: UserAction.GET_LOGIN_DETAILS,
+  type: UserAction.SIGNUP_SUCCESS,
   payload: {
     firstName: signUpDetails.firstName,
     lastName: signUpDetails.lastName,

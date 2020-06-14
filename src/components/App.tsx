@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import styled from "styled-components";
 
-import Login from "./login";
-import Register from "./register";
-import AddCompany from "./company/addCompany";
-import FileUpload from "./company/fileUpload";
+import Login from "./login/index";
+import Register from "./register/index";
+import AddCompany from "./company/addCompany/index";
+import FileUpload from "./company/uploadFiles/index";
 
 const Container = styled.div`
   margin: 0;
