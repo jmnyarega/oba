@@ -1,0 +1,40 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"],
+        "no-extra-parens": 1,
+        "no-empty": 1,
+        "no-extra-semi": 1,
+        "no-loss-of-precision": 1,
+        "react/jsx-filename-extension":
+            [ 2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] } ],
+        "jsx-a11y/label-has-associated-control": [ 2, {
+            "components": [ "Label" ],
+            "allowChildren": true
+        }]
+    }
+}
