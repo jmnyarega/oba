@@ -13,11 +13,11 @@ import Button from "../../common/button.styles";
 import { FileUploadTypes } from "./fileUpload.types";
 
 const FileUploadForm = (props: FileUploadTypes) => {
-  const { onUploadFile, name, size, type } = props;
+  const { onUploadFile, name, size, type, handleSubmit } = props;
   return (
     <FileUploadContainer>
       <Heading> File Upload </Heading>
-      <UploadSection>
+      <UploadSection onSubmit={handleSubmit}>
         <CustomFileUpload>
           <label htmlFor="file"> Select File </label>
           <input

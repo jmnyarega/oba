@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 import FileUploadForm from "./fileUploadForm";
 
-const FileUpload = () => {
+import { State } from "../../../reducers/fileReducer";
+import { fileUpload, FileDetails } from "../../../actions/fileActions";
+
+import { DispatchProps, StateProps } from "./fileUpload.types";
+
+type Props = DispatchProps & StateProps;
+
+const FileUpload = ({ upload }: Props) => {
   const emptyBlob = new Blob([], {});
   const [size, setSize] = useState(0);
   const [name, setName] = useState("");
@@ -22,8 +31,14 @@ const FileUpload = () => {
     setBlob(file);
     setFileType(fileType);
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    upload({ size, name, type, blob });
+  };
   return (
     <FileUploadForm
+      handleSubmit={handleSubmit}
       onUploadFile={onUploadFile}
       name={name}
       size={size}
@@ -32,4 +47,12 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+const mapStateToProps = (state: State) => {
+  return { file: state };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  upload: (data: FileDetails) => dispatch(fileUpload(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileUpload);
