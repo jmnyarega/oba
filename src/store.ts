@@ -8,6 +8,7 @@ import signUpReducer from "./reducers/signUpReducer";
 import fileReducer from "./reducers/fileReducer";
 import companyReducer from "./reducers/companyReducer";
 import currentUserReducer from "./reducers/currentUserReducer";
+import transactionReducer from "./reducers/transactionReducer";
 
 const rootReducer = combineReducers({
   login: loginReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   file: fileReducer,
   company: companyReducer,
   currentUser: currentUserReducer,
+  transactions: transactionReducer,
 });
 
 const store = createStore(

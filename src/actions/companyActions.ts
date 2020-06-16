@@ -6,6 +6,9 @@ export enum CompanyAction {
   ADD_COMPANY_SUCCESS = "ADD_COMPANY_SUCCESS",
   ADD_COMPANY_PENDING = "ADD_COMPANY_PENDING",
   ADD_COMPANY_FAIL = "ADD_COMPANY__FAIL",
+  GET_COMPANY_SUCCESS = "GET_COMPANY_SUCCESS",
+  GET_COMPANY_PENDING = "GET_COMPANY_PENDING",
+  GET_COMPANY_FAIL = "GET_COMPANY_FAIL",
 }
 export type Action = {
   type: CompanyAction;
@@ -44,6 +47,20 @@ export const addCompanyFail = (message: string) => {
   };
 };
 
+export const getCompanySuccess = (payload: any) => ({
+  type: CompanyAction.GET_COMPANY_SUCCESS,
+  payload,
+});
+
+export const getCompanyPending = () => ({
+  type: CompanyAction.GET_COMPANY_PENDING,
+});
+
+export const getCompanyError = (message: string) => ({
+  type: CompanyAction.GET_COMPANY_FAIL,
+  message,
+});
+
 export const addCompany = (data: CompanyDetails): any => {
   return (dispatch: Dispatch) => {
     dispatch(addCompanyPending());
@@ -52,6 +69,18 @@ export const addCompany = (data: CompanyDetails): any => {
       .then((res) => {
         dispatch(addCompanySuccess(res.data));
       })
-      .catch((err) => dispatch(addCompanyFail(err.message)));
+      .catch((err) => dispatch(addCompanyFail("failed")));
+  };
+};
+
+export const getCompany = (): any => {
+  return (dispatch: Dispatch) => {
+    dispatch(getCompanyPending());
+    return http()
+      .get(`${baseUrl}/company`)
+      .then((res) => {
+        dispatch(getCompanySuccess(res.data));
+      })
+      .catch((err) => getCompanyError(err.message));
   };
 };

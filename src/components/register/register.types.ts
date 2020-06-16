@@ -9,6 +9,8 @@ export type SignUpTypes = {
   handlePassword(event: React.FormEvent<HTMLInputElement>): void;
   handleConfirmPassword(event: React.FormEvent<HTMLInputElement>): void;
   handleFirstName(event: React.FormEvent<HTMLInputElement>): void;
+  message: string;
+  pending: boolean;
 };
 
 export type DispatchProps = {

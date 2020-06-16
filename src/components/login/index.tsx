@@ -14,6 +14,8 @@ import { DispatchProps, StateProps } from "./login.types";
 type Props = RouteComponentProps & DispatchProps & StateProps;
 
 const Login = ({ history, login, user }: Props) => {
+  //@ts-ignore
+  const { pending, message } = user.login;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,14 +31,17 @@ const Login = ({ history, login, user }: Props) => {
     e.preventDefault();
     const data = { email, password };
     login(data);
-    if (user.login.message) {
-      history.push("/upload");
-    }
   };
+
+  if (!pending && message === "login success") {
+    window.location.href = "/charts";
+  }
 
   return (
     <SignInForm
       handleSumit={handleSumit}
+      message={message}
+      pending={pending}
       handlePassword={handlePassword}
       handleEmail={handleEmail}
     />

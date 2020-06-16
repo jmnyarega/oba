@@ -20,7 +20,26 @@ const initialReducer: State = {
 const fileReducer = (state = initialReducer.file, action: any) => {
   switch (action.type) {
     case FileAction.UPLOAD_SUCCESS: {
-      return action.payload;
+      return {
+        ...state,
+        file: action.payload,
+        pending: false,
+        message: "success",
+      };
+    }
+    case FileAction.UPLOAD_PENDING: {
+      return {
+        ...state,
+        message: action.message,
+        pending: true,
+      };
+    }
+    case FileAction.UPLOAD_FAIL: {
+      return {
+        ...state,
+        message: action.message,
+        pending: false,
+      };
     }
     default: {
       return state;

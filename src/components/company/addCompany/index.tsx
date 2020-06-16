@@ -12,6 +12,12 @@ import AddCompanyForm from "./addCompanyForm";
 type Props = StateProps & DispatchProps;
 
 const AddCompany = (props: Props) => {
+  const {
+    company: { company },
+  } = props;
+  //@ts-ignore
+  const { message, pending } = company;
+  console.log(message, pending);
   const [name, setName] = useState("");
   const [accSoftware, setAccSoftware] = useState("");
   const [address, setAddress] = useState("");
@@ -64,10 +70,14 @@ const AddCompany = (props: Props) => {
       country,
       entity,
       sales,
+      //@ts-ignore
+      userId: props.company.currentUser.id,
     });
   };
   return (
     <AddCompanyForm
+      message={message}
+      pending={pending}
       handleSubmit={handleSubmit}
       handleEntity={handleEntity}
       handleCountry={handleCountry}

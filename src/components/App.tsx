@@ -12,17 +12,16 @@ import Register from "./register/index";
 import AddCompany from "./company/addCompany/index";
 import FileUpload from "./company/uploadFiles/index";
 import Charts from "./company/charts/index";
+import Logout from "./logout/logout";
+
+import Guest from "./common/TopBar/guest";
+import LoggedIn from "./common/TopBar/loggedin";
 
 const Container = styled.div`
   margin: 0;
   font-family: "Roboto";
   padding: 0;
 `;
-
-const loadUser = () => {
-  console.log("loaded uer");
-};
-
 export type DispatchProps = {
   loggedInUser: () => void;
 };
@@ -35,30 +34,44 @@ type Props = DispatchProps & StateProps;
 
 function publicRoutes() {
   return (
-    <Switch>
-      <Route path="/signup">
-        <Register />
-      </Route>
-      <Route path="">
-        <Login />
-      </Route>
-    </Switch>
+    <div>
+      <Guest />
+      <Switch>
+        <Route path="/signup">
+          <Register />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="">
+          {() => {
+            return null;
+          }}
+        </Route>
+      </Switch>
+    </div>
   );
 }
 
 function privateRoutes() {
   return (
-    <Switch>
-      <Route path="/addCompany">
-        <AddCompany />
-      </Route>
-      <Route path="/upload">
-        <FileUpload />
-      </Route>
-      <Route path="">
-        <Charts />
-      </Route>
-    </Switch>
+    <div>
+      <LoggedIn />
+      <Switch>
+        <Route path="/addCompany">
+          <AddCompany />
+        </Route>
+        <Route path="/upload">
+          <FileUpload />
+        </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
+        <Route path="">
+          <Charts />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 
@@ -68,7 +81,7 @@ function App(props: Props) {
   return (
     <Container>
       {/* @ts-ignore */}
-      <Router>{currentUser.email ? privateRoutes() : publicRoutes()}</Router>
+      <Router>{!currentUser.email ? publicRoutes() : privateRoutes()}</Router>
     </Container>
   );
 }

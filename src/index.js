@@ -7,7 +7,6 @@ import App from "./components/App";
 
 import store from "./store";
 
-console.log(process.env);
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

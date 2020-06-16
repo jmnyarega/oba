@@ -11,6 +11,8 @@ export type CompanyTypes = {
   handleEntity(event: React.FormEvent<HTMLInputElement>): void;
   handleAccSoftware(event: React.FormEvent<HTMLInputElement>): void;
   handleSales(event: React.FormEvent<HTMLInputElement>): void;
+  message: string;
+  pending: boolean;
 };
 
 export type DispatchProps = {

@@ -20,6 +20,8 @@ const SignUpForm = (props: SignUpTypes) => {
     handlePhoneNumber,
     handlePassword,
     handleConfirmPassword,
+    message,
+    pending,
   } = props;
   return (
     <RegisterContainer>
@@ -95,6 +97,14 @@ const SignUpForm = (props: SignUpTypes) => {
         </Terms>
         <Button> Sign Up </Button>
       </RegistrationForm>
+      <label>
+        {!pending && message === "failed" && "Something went wrong, try again"}
+        {!pending && message === "success" && "Registration successful"}
+        {pending && "Processing..."}
+      </label>
+      <p>
+        <a href="/login">Login </a>
+      </p>
     </RegisterContainer>
   );
 };

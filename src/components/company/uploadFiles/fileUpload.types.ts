@@ -7,10 +7,15 @@ export type FileUploadTypes = {
   name: string;
   size: number;
   type: string;
+  company: any;
+  message: string;
+  pending: boolean;
+  handleCompany(event: React.FormEvent<HTMLSelectElement>): void;
 };
 
 export type DispatchProps = {
   upload: (data: FileDetails) => void;
+  getCompany: () => void;
 };
 
 export type StateProps = {

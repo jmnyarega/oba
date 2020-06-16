@@ -7,7 +7,7 @@ import Input from "../common/input.styles";
 import { SignUpTypes } from "./login.types";
 
 const SignInForm = (props: SignUpTypes) => {
-  const { handleSumit, handleEmail, handlePassword } = props;
+  const { handleSumit, handleEmail, handlePassword, message, pending } = props;
   return (
     <LoginContainer>
       <Heading> Sign In </Heading>
@@ -39,6 +39,10 @@ const SignInForm = (props: SignUpTypes) => {
         </div>
         <Button> Sign In </Button>
       </LoginForm>
+      <label> {pending ? "Loading..." : message} </label>
+      <p>
+        <a href="/signup">Create account </a>
+      </p>
     </LoginContainer>
   );
 };

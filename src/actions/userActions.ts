@@ -108,6 +108,6 @@ export const userSignUp = (signUpDetails: SignUpDetails): any => {
         dispatch(userSignUpSucess(res.data));
         addTokenToLocalStorage(res.data.token);
       })
-      .catch((err) => dispatch(userSignUpFail(err.message)));
+      .catch((err) => dispatch(userSignUpFail("failed")));
   };
 };

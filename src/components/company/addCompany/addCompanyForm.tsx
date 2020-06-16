@@ -22,6 +22,8 @@ const AddCompanyForm = (props: CompanyTypes) => {
     handleAddress,
     handleCountry,
     handleAccSoftware,
+    message,
+    pending,
   } = props;
   return (
     <RegisterCompanyContainer>
@@ -53,7 +55,7 @@ const AddCompanyForm = (props: CompanyTypes) => {
           Company Address
           <Input
             onChange={handleAddress}
-            type="email"
+            type="text"
             name="company_address"
             id="company_address"
             placeholder="123 main street New York"
@@ -116,6 +118,12 @@ const AddCompanyForm = (props: CompanyTypes) => {
         </label>
         <Button>Add Company</Button>
       </CompanyRegistrationForm>
+      <label>
+        {console.log(message)}
+        {pending && "processing..."}
+        {!pending && message === "success" && "Company Added."}
+        {!pending && message === "failed" && "Something went wrong try again"}
+      </label>
     </RegisterCompanyContainer>
   );
 };

@@ -13,23 +13,15 @@ export type State = {
   };
 };
 
-const initialReducer: State = {
-  company: {
-    name: "Powered by People",
-    accSoftware: "Quickbooks",
-    address: "1009, NRB",
-    abbr: "PBP",
-    cop: "Kenya",
-    country: "Kenya",
-    entity: "Retail",
-    sales: "100",
-  },
-};
-
-const companyReducer = (state = initialReducer.company, action: any) => {
+const companyReducer = (state = [], action: any) => {
   switch (action.type) {
     case CompanyAction.ADD_COMPANY_SUCCESS: {
-      return action.payload;
+      return {
+        ...state,
+        company: action.payload,
+        pending: false,
+        message: "success",
+      };
     }
     case CompanyAction.ADD_COMPANY_PENDING: {
       return {
@@ -42,6 +34,27 @@ const companyReducer = (state = initialReducer.company, action: any) => {
         ...state,
         pending: false,
         message: action.message,
+      };
+    }
+    case CompanyAction.GET_COMPANY_PENDING: {
+      return {
+        ...state,
+        pending: true,
+        message: action.message,
+      };
+    }
+    case CompanyAction.GET_COMPANY_SUCCESS: {
+      return {
+        ...state,
+        pending: false,
+        payload: action.payload,
+      };
+    }
+    case CompanyAction.GET_COMPANY_FAIL: {
+      return {
+        ...state,
+        pending: false,
+        payload: action.message,
       };
     }
     default: {

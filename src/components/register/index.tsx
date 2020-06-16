@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -11,8 +12,8 @@ import { userSignUp } from "../../actions/userActions";
 import { DispatchProps, StateProps } from "./register.types";
 
 type Props = RouteComponentProps & DispatchProps & StateProps;
-
 const Register = ({ history, signUp, user }: Props) => {
+  const { pending, message } = user.signup;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -57,8 +58,14 @@ const Register = ({ history, signUp, user }: Props) => {
     signUp(data);
   };
 
+  if (!pending && message === "success") {
+    window.location.href = "/charts";
+  }
+
   return (
     <SignUpForm
+      message={message}
+      pending={pending}
       handleSumit={handleSumit}
       handleEmail={handleEmail}
       handleLastName={handleLastName}
