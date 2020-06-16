@@ -1,3 +1,7 @@
+import { Dispatch } from "redux";
+import baseUrl from "../helpers/baseUrl";
+import { http, addTokenToLocalStorage, decodeUser } from "../helpers/auth";
+
 export enum UserAction {
   LOGIN_SUCCESS = "LOGIN_SUCCESS",
   LOGIN_PENDING = "LOGIN_PENDING",
@@ -7,6 +11,7 @@ export enum UserAction {
   SIGNUP_PENDING = "SIGNUP_PENDING",
   SIGNUP_FAIL = "SIGNUP_FAIL",
 }
+
 export type Action = {
   type: UserAction;
   payload: any;
@@ -27,24 +32,82 @@ export type LoginDetails = {
   password: string;
 };
 
-export const userLogin = (loginDetails: LoginDetails): Action => ({
-  type: UserAction.LOGIN_SUCCESS,
-  payload: {
-    email: loginDetails.email,
-    password: loginDetails.password,
-  },
-  message: "login successful",
-});
+export const userSignUpPending = () => {
+  return {
+    type: UserAction.SIGNUP_PENDING,
+  };
+};
 
-export const userSignUp = (signUpDetails: SignUpDetails): Action => ({
-  type: UserAction.SIGNUP_SUCCESS,
-  payload: {
-    firstName: signUpDetails.firstName,
-    lastName: signUpDetails.lastName,
-    email: signUpDetails.email,
-    phoneNumber: signUpDetails.phoneNumber,
-    password: signUpDetails.password,
-    confirmPassword: signUpDetails.confirmPassword,
-  },
-  message: "signup successful",
-});
+export const userSignUpSucess = (payload: any) => {
+  return {
+    payload,
+    type: UserAction.SIGNUP_SUCCESS,
+  };
+};
+
+export const userSigninFail = (message: string) => {
+  return {
+    message,
+    type: UserAction.LOGIN_FAIL,
+  };
+};
+
+export const userSigninPending = () => {
+  return {
+    type: UserAction.LOGIN_PENDING,
+  };
+};
+
+export const userSigninSucess = (payload: any) => {
+  return {
+    payload,
+    type: UserAction.LOGIN_SUCCESS,
+  };
+};
+
+export const userSignUpFail = (message: string) => {
+  return {
+    message,
+    type: UserAction.SIGNUP_FAIL,
+  };
+};
+
+export const getUserDataSuccess = (payload: any) => {
+  return {
+    type: UserAction.GET_LOGIN_DETAILS,
+    payload,
+  };
+};
+
+export const userLogin = (loginDetails: LoginDetails): any => {
+  return (dispatch: Dispatch) => {
+    dispatch(userSigninPending());
+    return http()
+      .post(`${baseUrl}/login`, loginDetails)
+      .then((res) => {
+        dispatch(userSigninSucess(res.data));
+        addTokenToLocalStorage(res.data.token);
+      })
+      .catch((err) => dispatch(userSigninFail(err.message)));
+  };
+};
+
+export const getUserData = (): any => {
+  return (dispatch: Dispatch) => {
+    const data = decodeUser();
+    dispatch(getUserDataSuccess(data));
+  };
+};
+
+export const userSignUp = (signUpDetails: SignUpDetails): any => {
+  return (dispatch: Dispatch) => {
+    dispatch(userSignUpPending());
+    return http()
+      .post(`${baseUrl}/signup`, signUpDetails)
+      .then((res) => {
+        dispatch(userSignUpSucess(res.data));
+        addTokenToLocalStorage(res.data.token);
+      })
+      .catch((err) => dispatch(userSignUpFail(err.message)));
+  };
+};

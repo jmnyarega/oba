@@ -25,6 +25,7 @@ const initialReducer: State = {
 };
 
 const signUpReducer = (state = initialReducer.signup, action: any) => {
+  console.log(UserAction.SIGNUP_FAIL);
   switch (action.type) {
     case UserAction.SIGNUP_SUCCESS: {
       return action.payload;

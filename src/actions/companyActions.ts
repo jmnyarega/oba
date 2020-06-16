@@ -1,3 +1,7 @@
+import { Dispatch } from "redux";
+import baseUrl from "../helpers/baseUrl";
+import { http } from "../helpers/auth";
+
 export enum CompanyAction {
   ADD_COMPANY_SUCCESS = "ADD_COMPANY_SUCCESS",
   ADD_COMPANY_PENDING = "ADD_COMPANY_PENDING",
@@ -20,17 +24,34 @@ export type CompanyDetails = {
   sales: string;
 };
 
-export const addCompany = (company: CompanyDetails): Action => ({
-  type: CompanyAction.ADD_COMPANY_SUCCESS,
-  payload: {
-    name: company.name,
-    accSoftware: company.accSoftware,
-    address: company.address,
-    abbr: company.abbr,
-    cop: company.cop,
-    country: company.country,
-    entity: company.entity,
-    sales: company.sales,
-  },
-  message: "Add successful",
-});
+export const addCompanyPending = () => {
+  return {
+    type: CompanyAction.ADD_COMPANY_PENDING,
+  };
+};
+
+export const addCompanySuccess = (payload: any) => {
+  return {
+    payload,
+    type: CompanyAction.ADD_COMPANY_SUCCESS,
+  };
+};
+
+export const addCompanyFail = (message: string) => {
+  return {
+    message,
+    type: CompanyAction.ADD_COMPANY_FAIL,
+  };
+};
+
+export const addCompany = (data: CompanyDetails): any => {
+  return (dispatch: Dispatch) => {
+    dispatch(addCompanyPending());
+    return http()
+      .post(`${baseUrl}/company`, data)
+      .then((res) => {
+        dispatch(addCompanySuccess(res.data));
+      })
+      .catch((err) => dispatch(addCompanyFail(err.message)));
+  };
+};

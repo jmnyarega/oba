@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import styled from "styled-components";
+
+import { getUserData } from "../actions/userActions";
+import { State } from "../reducers/currentUserReducer";
 
 import Login from "./login/index";
 import Register from "./register/index";
 import AddCompany from "./company/addCompany/index";
 import FileUpload from "./company/uploadFiles/index";
+import Charts from "./company/charts/index";
 
 const Container = styled.div`
   margin: 0;
@@ -14,27 +19,69 @@ const Container = styled.div`
   padding: 0;
 `;
 
-function App() {
+const loadUser = () => {
+  console.log("loaded uer");
+};
+
+export type DispatchProps = {
+  loggedInUser: () => void;
+};
+
+export type StateProps = {
+  currentUser: State;
+};
+
+type Props = DispatchProps & StateProps;
+
+function publicRoutes() {
+  return (
+    <Switch>
+      <Route path="/signup">
+        <Register />
+      </Route>
+      <Route path="">
+        <Login />
+      </Route>
+    </Switch>
+  );
+}
+
+function privateRoutes() {
+  return (
+    <Switch>
+      <Route path="/addCompany">
+        <AddCompany />
+      </Route>
+      <Route path="/upload">
+        <FileUpload />
+      </Route>
+      <Route path="">
+        <Charts />
+      </Route>
+    </Switch>
+  );
+}
+
+function App(props: Props) {
+  const { currentUser, loggedInUser } = props;
+  useEffect(() => loggedInUser(), []);
   return (
     <Container>
-      <Router>
-        <Switch>
-          <Route path="/signup">
-            <Register />
-          </Route>
-          <Route path="/addCompany">
-            <AddCompany />
-          </Route>
-          <Route path="/upload">
-            <FileUpload />
-          </Route>
-          <Route path="">
-            <Login />
-          </Route>
-        </Switch>
-      </Router>
+      {/* @ts-ignore */}
+      <Router>{currentUser.email ? privateRoutes() : publicRoutes()}</Router>
     </Container>
   );
 }
 
-export default App;
+const mapStateToProps = (state: State) => {
+  return { currentUser: state && state.currentUser };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    loggedInUser: () => dispatch(getUserData()),
+  };
+};
+
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(App);

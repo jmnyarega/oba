@@ -31,6 +31,19 @@ const companyReducer = (state = initialReducer.company, action: any) => {
     case CompanyAction.ADD_COMPANY_SUCCESS: {
       return action.payload;
     }
+    case CompanyAction.ADD_COMPANY_PENDING: {
+      return {
+        ...state,
+        pending: true,
+      };
+    }
+    case CompanyAction.ADD_COMPANY_FAIL: {
+      return {
+        ...state,
+        pending: false,
+        message: action.message,
+      };
+    }
     default: {
       return state;
     }

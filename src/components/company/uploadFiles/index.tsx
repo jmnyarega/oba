@@ -34,7 +34,12 @@ const FileUpload = ({ upload }: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    upload({ size, name, type, blob });
+    const file = new FormData();
+    file.append("selectedFile", blob);
+    file.append("description", name);
+    console.log(file);
+    // @ts-ignore
+    upload(file);
   };
   return (
     <FileUploadForm
@@ -47,9 +52,7 @@ const FileUpload = ({ upload }: Props) => {
   );
 };
 
-const mapStateToProps = (state: State) => {
-  return { file: state };
-};
+const mapStateToProps = (state: State) => ({ file: state });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   upload: (data: FileDetails) => dispatch(fileUpload(data)),
