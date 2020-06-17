@@ -37,10 +37,10 @@ function publicRoutes() {
     <div>
       <Guest />
       <Switch>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <Register />
         </Route>
-        <Route path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
       </Switch>
@@ -53,13 +53,13 @@ function privateRoutes() {
     <div>
       <LoggedIn />
       <Switch>
-        <Route path="/addCompany">
+        <Route exact path="/addCompany">
           <AddCompany />
         </Route>
-        <Route path="/upload">
+        <Route exact path="/upload">
           <FileUpload />
         </Route>
-        <Route path="/logout">
+        <Route exact path="/logout">
           <Logout />
         </Route>
         <Route path="">
