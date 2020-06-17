@@ -40,7 +40,7 @@ function publicRoutes() {
         <Route exact path="/signup">
           <Register />
         </Route>
-        <Route exact path="/login">
+        <Route exact path="">
           <Login />
         </Route>
       </Switch>
@@ -62,7 +62,7 @@ function privateRoutes() {
         <Route exact path="/logout">
           <Logout />
         </Route>
-        <Route path="">
+        <Route exact path="/charts">
           <Charts />
         </Route>
       </Switch>
