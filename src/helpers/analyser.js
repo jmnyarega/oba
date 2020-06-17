@@ -22,7 +22,7 @@ const pieChart = (data) => {
         (x) => x.transaction === "Bill" || x.transaction === "Bill Payment"
       )
       .map((x) => {
-        outgoingAmount += x.amount;
+        outgoingAmount += Number(x.amount);
       });
   data.length &&
     data
@@ -30,7 +30,7 @@ const pieChart = (data) => {
         (x) => x.transaction === "Order" || x.transaction === "Order Payment"
       )
       .map((x) => {
-        incomingAmount += x.amount;
+        incomingAmount += Number(x.amount);
       });
   return [
     { name: "outgoing", value: outgoingAmount },
