@@ -24,6 +24,7 @@ const FileUpload = ({ upload, file, getCompany }: Props) => {
   const [blob, setBlob] = useState(emptyBlob);
   const [type, setFileType] = useState("");
   const [id, setCompany] = useState("");
+  // eslint-disable-next-line
   useEffect(() => getCompany(), []);
 
   const onUploadFile = (e: React.FormEvent<HTMLInputElement>) => {

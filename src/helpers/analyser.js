@@ -4,7 +4,7 @@ const getTopProduct = (data) => {
   data.length &&
     data
       .filter((x) => x.transaction)
-      .map((product) => {
+      .forEach((product) => {
         if (product.amount > topAmount) {
           topAmount = product.amount;
           topProduct = product.item;
@@ -21,7 +21,7 @@ const pieChart = (data) => {
       .filter(
         (x) => x.transaction === "Bill" || x.transaction === "Bill Payment"
       )
-      .map((x) => {
+      .forEach((x) => {
         outgoingAmount += Number(x.amount);
       });
   data.length &&
@@ -29,7 +29,7 @@ const pieChart = (data) => {
       .filter(
         (x) => x.transaction === "Order" || x.transaction === "Order Payment"
       )
-      .map((x) => {
+      .forEach((x) => {
         incomingAmount += Number(x.amount);
       });
   return [
@@ -43,7 +43,7 @@ const lineChart = (data) => {
     data.length &&
     data
       .filter((x) => x.transaction)
-      .map((x) => ({
+      .forEach((x) => ({
         item: x.item,
         value: x.amount,
       }));
@@ -55,7 +55,7 @@ const barChart = (data) => {
     data.length &&
     data
       .filter((x) => x.transaction)
-      .map((x) => ({
+      .forEach((x) => ({
         item: x.item,
         quantity: x.quantity,
       }));

@@ -72,6 +72,7 @@ function privateRoutes() {
 
 function App(props: Props) {
   const { currentUser, loggedInUser } = props;
+  // eslint-disable-next-line
   useEffect(() => loggedInUser(), []);
   return (
     <Container>

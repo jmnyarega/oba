@@ -1,5 +1,3 @@
-import React from "react";
-
 import { removeLocalStorageToken } from "../../helpers/auth";
 
 const Logout = () => {

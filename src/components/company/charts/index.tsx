@@ -39,6 +39,7 @@ type Props = StateProps & DispatchProps;
 
 const Charts = (props: Props) => {
   const { transactions, getTransactions } = props;
+  // eslint-disable-next-line
   useEffect(() => getTransactions(), []);
   const { pieChart, lineChart, barChart } = analyser(transactions);
   return (

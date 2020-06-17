@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Line,
 } from "recharts";
-import theme from "../../../theme";
 
 const LineChartComponent = (props: any) => {
   const { data } = props;
