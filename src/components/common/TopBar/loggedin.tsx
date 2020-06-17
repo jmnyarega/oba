@@ -38,10 +38,10 @@ const LoggedIn = () => {
     <Container>
       <Logo> OBA </Logo>
       <Links>
-        <a href="/charts"> Charts </a>
-        <a href="/addCompany"> Add Company </a>
-        <a href="/upload"> Upload </a>
-        <a href="/logout"> logout </a>
+        <a href="/oba/charts"> Charts </a>
+        <a href="/oba/addCompany"> Add Company </a>
+        <a href="/oba/upload"> Upload </a>
+        <a href="/oba/logout"> logout </a>
       </Links>
     </Container>
   );

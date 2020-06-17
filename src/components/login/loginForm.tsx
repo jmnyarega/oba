@@ -41,7 +41,7 @@ const SignInForm = (props: SignUpTypes) => {
       </LoginForm>
       <label> {pending ? "Loading..." : message} </label>
       <p>
-        <a href="/signup">Create account </a>
+        <a href="/oba/signup">Create account </a>
       </p>
     </LoginContainer>
   );
