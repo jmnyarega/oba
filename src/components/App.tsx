@@ -43,11 +43,6 @@ function publicRoutes() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="">
-          {() => {
-            return null;
-          }}
-        </Route>
       </Switch>
     </div>
   );
