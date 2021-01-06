@@ -17,7 +17,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/recharts": "^1.8.12",
     "@types/styled-components": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "d3-scale": "^3.2.1",
     "d3-scale-chromatic": "^1.5.0",
     "jwt-decode": "^2.2.0",
